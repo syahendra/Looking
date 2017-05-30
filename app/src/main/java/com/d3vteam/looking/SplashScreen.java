@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.d3vteam.looking.activity.login;
+
 import gr.net.maroulis.library.EasySplashScreen;
 
 /**
@@ -18,8 +20,8 @@ public class SplashScreen extends AppCompatActivity {
         EasySplashScreen config = new EasySplashScreen(SplashScreen.this)
                 .withFullScreen()
                 .withTargetActivity(login.class)
-                .withSplashTimeOut(2000)
                 .withBackgroundColor(Color.parseColor("#26A69A"))
+                .withSplashTimeOut(2000)
                 .withLogo(R.drawable.logoo)
                 .withHeaderText("Selamat Datang")
                 .withFooterText("Copyrigth 2017");
