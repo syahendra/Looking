@@ -17,8 +17,10 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
 
-    <string name="slide_1_title">Hello Food!</string>
-    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_1_title">Hello Looking</string>
+    <string name="slide_1_desc">ini adalah aplikasi penyewaan mobil di daerah jember!</string>
+
 
     <string name="slide_2_title">Movie Tickets</string>
     <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
