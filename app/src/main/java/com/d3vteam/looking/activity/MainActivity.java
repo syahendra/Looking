@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private TextView txtName;
-    private TextView txtEmail;
+    private TextView txtNis;
     private Button btnLogout;
 
     private SQLiteHandler db;
@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_pengaturan);
 
-        txtName = (TextView) findViewById(R.id.nama_member);
-        txtEmail = (TextView) findViewById(R.id.email);
+        txtName = (TextView) findViewById(R.id.name);
+        txtNis = (TextView) findViewById(R.id.nis);
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
         // SqLite database handler
@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
 
-        String nama_member = user.get("nama_member");
-        String email = user.get("email");
+        String name = user.get("name");
+        String nis = user.get("nis");
 
         // Displaying the user details on the screen
-        txtName.setText(nama_member);
-        txtEmail.setText(email);
+        txtName.setText(name);
+        txtNis.setText(nis);
 
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
