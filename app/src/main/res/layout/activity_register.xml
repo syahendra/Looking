@@ -50,7 +50,7 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
-        <EditText
+      <!--  <EditText
             android:id="@+id/telpon"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
+            android:textColorHint="@color/input_register_hint" /> -->
 
         <EditText
             android:id="@+id/password"

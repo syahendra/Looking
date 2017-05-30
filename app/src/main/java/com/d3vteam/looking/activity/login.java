@@ -31,7 +31,7 @@ public class login extends AppCompatActivity {
     private static final String TAG = Register.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
-    private EditText inputEmail;
+    private EditText inputNis;
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -42,7 +42,7 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        inputEmail = (EditText) findViewById(R.id.email);
+        inputNis = (EditText) findViewById(R.id.nis);
         inputPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
@@ -60,7 +60,7 @@ public class login extends AppCompatActivity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(login.this, MainActivity.class);
+            Intent intent = new Intent(login.this, DashboardActivity.class);
             startActivity(intent);
             finish();
         }
@@ -69,13 +69,13 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                String email = inputEmail.getText().toString().trim();
+                String nis = inputNis.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
                 // Check for empty data in the form
-                if (!email.isEmpty() && !password.isEmpty()) {
+                if (!nis.isEmpty() && !password.isEmpty()) {
                     // login user
-                    checkLogin(email, password);
+                    checkLogin(nis, password);
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
@@ -102,7 +102,7 @@ public class login extends AppCompatActivity {
     /**
      * function to verify login details in mysql db
      * */
-    private void checkLogin(final String email, final String password) {
+    private void checkLogin(final String nis, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
@@ -131,18 +131,18 @@ public class login extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String nama_member = user.getString("nama_member");
-                        String email = user.getString("email");
-                        String telpon = user.getString("telpon");
+                        String name = user.getString("name");
+                        String nis = user.getString("nis");
+                        //String telpon = user.getString("telpon");
                         String created_at = user
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(nama_member, email, telpon,  uid, created_at);
+                        db.addUser(name, nis, uid, created_at);
 
                         // Launch main activity
                         Intent intent = new Intent(login.this,
-                                MainActivity.class);
+                                DashboardActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -173,7 +173,7 @@ public class login extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
+                params.put("nis", nis);
                 params.put("password", password);
 
                 return params;
