@@ -32,8 +32,8 @@ public class Register extends AppCompatActivity {
     private Button btnRegister;
     private Button btnLinkToLogin;
     private EditText inputFullName;
-    private EditText inputEmail;
-    private EditText inputTelpon;
+    private EditText inputNIS;
+   // private EditText inputTelpon;
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -44,9 +44,9 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        inputFullName = (EditText) findViewById(R.id.nama_member);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputTelpon = (EditText) findViewById(R.id.telpon);
+        inputFullName = (EditText) findViewById(R.id.name);
+        inputNIS = (EditText) findViewById(R.id.nis);
+       // inputTelpon = (EditText) findViewById(R.id.telpon);
         inputPassword = (EditText) findViewById(R.id.password);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
@@ -73,13 +73,12 @@ public class Register extends AppCompatActivity {
         // Register Button Click event
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String nama_member = inputFullName.getText().toString().trim();
-                String email = inputEmail.getText().toString().trim();
-                String telpon = inputTelpon.getText().toString().trim();
+                String name = inputFullName.getText().toString().trim();
+                String nis = inputNIS.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                if (!nama_member.isEmpty() && !email.isEmpty() && !telpon.isEmpty() && !password.isEmpty()) {
-                    registerUser(nama_member, email, telpon, password);
+                if (!name.isEmpty() && !nis.isEmpty()  && !password.isEmpty()) {
+                    registerUser(name, nis, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -105,7 +104,7 @@ public class Register extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, nama_member,
      * email, telpon , password) to register url
      * */
-    private void registerUser(final String nama_member, final String email, final String telpon,
+    private void registerUser(final String name, final String nis,
                               final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
@@ -130,14 +129,14 @@ public class Register extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String nama_member = user.getString("nama_member");
-                        String email = user.getString("email");
-                        String telpon = user.getString("telpon");
+                        String name = user.getString("name");
+                        String nis = user.getString("nis");
+                        //String telpon = user.getString("telpon");
                         String created_at = user
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(nama_member, email, telpon, uid, created_at);
+                        db.addUser(name, nis, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User Registrasi Berasih. Try login now!", Toast.LENGTH_LONG).show();
 
@@ -174,9 +173,9 @@ public class Register extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("nama_member", nama_member);
-                params.put("telpon", telpon);
-                params.put("email", email);
+                params.put("name", name);
+                //params.put("telpon", telpon);
+                params.put("nis", nis);
                 params.put("password", password);
 
                 return params;
